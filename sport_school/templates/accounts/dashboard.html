@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="showcase-inner" class="py-2 text-white bg-primary">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4"> Личный кабинет</h1>
+                <p class="lead">Управляйте личным кабинетом</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb -->
+<section id="bc" class="mt-1">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'index' %}">
+                        <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="breadcrumb-item active"> Кабинет</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
+</section>
+<section id="dashboard" class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Добро пожаловать, {{user.username}}</h2>
+                <ul class="list-group">
+                    <li class="list-group-item active">Логин: {{user.username}}</li>
+                    <li class="list-group-item">Целое имя: {{user.first_name}} {{user.last_name}}</li>
+                    <li class="list-group-item">Телефон: {{user.user_data.phone}}</li>
+                    <li class="list-group-item">Email: {{user.email}}</li>
+                </ul>
+                <div class="card card-body mt-3">
+                  <h3>Ваши спортивные интересы</h3>
+                  {{user.user_data.sport_interests}}
+                </div>
+                <div class="py-4">
+                  <a href="{% url 'edit' %}" class="btn btn-secondary">Edit Data</a>
+                  <a href="#" class="btn btn-danger">Delete Profile</a>
+                </div>
+                {% if user.user_data.is_pupil %}
+                <p>Pupil</p>
+                {% else %}
+                  {% if user.application %}
+                  <div id="message" class="container">
+                      <div class="alert alert-success alert-dismissible text-center" role="alert">
+                          <div>
+                              Ваша заявка будет рассотрена в скором времени и мы свяжемся с вами.
+                          </div>
+                      </div>
+                  </div>
+                  {% else %}
+                  <a href="{% url 'apply_for_study' %}" class="btn btn-primary">Присоединись к нашей команде. Подай заявку</a>
+                  {% endif %}
+                <p><a href="{% url 'show_sports' %}">Просмотреть секции</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

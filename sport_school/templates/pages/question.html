@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Ask question</p>
+<form action="{% url 'ask_question' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" name="phone" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="question">Your Question</label>
+        <textarea class="form-control" id="question" name="question" rows="3"></textarea>
+    </div>
+    <input type="submit" value="Ask Question" class="btn btn-secondary btn-block">
+</form>
+{% endblock %}

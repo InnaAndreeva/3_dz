@@ -1,0 +1,7 @@
+# db.cnf
+[client]
+database = sport
+user = root
+password = prisma
+default-character-set = utf8
+wait_timeout = 28800
